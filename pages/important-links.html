@@ -1,0 +1,78 @@
+<style>
+body, html {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(180deg, #0f172a 60%, #334155 100%);
+	font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+	color: #e6eef8;
+	overflow: hidden;
+	font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+}
+.objectives-theme-card {
+	background: rgba(15,23,42,0.92);
+	border-radius: 18px;
+	box-shadow: 0 8px 32px rgba(30,41,59,0.18);
+	padding: clamp(16px, 4vw, 38px) clamp(12px, 5vw, 44px) clamp(12px, 3vw, 32px) clamp(12px, 5vw, 44px);
+	width: 100%;
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1.5px solid rgba(255,255,255,0.08);
+}
+.objectives-title {
+	font-size: clamp(0.96rem, 2.4vw, 1.68rem);
+	font-weight: 700;
+	color: #60a5fa;
+	margin-bottom: 0;
+	letter-spacing: 0.5px;
+}
+.links-list {
+	width: 100%;
+	margin: 32px 0 0 0;
+	padding: 0 0 0 1.2em;
+	color: #bae6fd;
+	font-size: 1.08em;
+	line-height: 1.7;
+}
+.links-list li {
+	margin-bottom: 1.2em;
+	color: #bae6fd;
+	font-size: 1em;
+}
+.links-list a {
+	color: #38bdf8;
+	text-decoration: underline;
+	transition: color 0.2s;
+}
+.links-list a:hover {
+	color: #fff;
+}
+</style>
+<div class="main-content">
+	<div class="objectives-theme-card">
+		<div class="objectives-title">Important Links</div>
+		<ol class="links-list">
+			<li><b>Co-Pilot related Learning</b>
+				<ol type="a">
+					<li><a href="https://learn.microsoft.com/en-us/power-platform/guidance/coe/starter-kit" target="_blank">Microsoft Power Platform CoE Starter Kit</a></li>
+					<li><a href="https://cloudwell.io/copilot-center-of-excellence-microsoft-365-guide/" target="_blank">CoPilot Center of Excellence (Cloudwell Guide)</a></li>
+				</ol>
+			</li>
+			<li><b>AIDLC related Learning</b>
+				<ol type="a">
+					<li><a href="https://azure.microsoft.com/en-us/blog/building-for-the-future-the-enterprise-generative-ai-application-lifecycle-with-azure-ai/" target="_blank">Enterprise Generative AI Application Lifecycle (Azure Blog)</a></li>
+					<li><a href="https://aws.amazon.com/blogs/devops/ai-driven-development-life-cycle/" target="_blank">AWS DevOps Blog (Methodology‑level learning)</a></li>
+				</ol>
+			</li>
+			<li><b>AI in Project &amp; Program Management</b>
+				<ol type="a">
+					<li><a href="https://www.pmi.org/learning/ai-in-project-management" target="_blank">AI in Project Management (PMI)</a></li>
+					<li><a href="https://www.analyticsinsight.net/artificial-intelligence/mastering-ai-program-management-a-framework-for-success" target="_blank">Mastering AI Program Management (Analytics Insight)</a></li>
+				</ol>
+			</li>
+		</ol>
+	</div>
+</div>

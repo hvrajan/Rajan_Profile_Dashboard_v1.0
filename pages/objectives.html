@@ -1,0 +1,167 @@
+<style>
+body, html {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #0f172a 60%, #334155 100%);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: #e6eef8;
+  overflow: hidden;
+  font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+/* Removed stray closing curly brace from CSS. */
+/* Removed stray style properties that were outside of any selector. */
+}
+.objectives-theme-card {
+  background: rgba(15,23,42,0.92);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(30,41,59,0.18);
+  padding: clamp(16px, 4vw, 38px) clamp(12px, 5vw, 44px) clamp(12px, 3vw, 32px) clamp(12px, 5vw, 44px);
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid rgba(255,255,255,0.08);
+}
+.objectives-title {
+  font-size: clamp(1.2rem, 3vw, 2.1rem);
+  font-weight: 700;
+  color: #60a5fa;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+@media (max-width:900px){
+  .main-content { width: 98vw; height: 98vh; max-width: 98vw; max-height: 98vh; }
+  .objectives-theme-card { padding: clamp(8px, 3vw, 18px) clamp(4px, 4vw, 6vw); }
+  .objectives-title { font-size: clamp(1rem, 2.5vw, 1.3rem); }
+}
+</style>
+
+<div class="main-content">
+  <div class="objectives-theme-card">
+    <div class="objectives-title">Objectives &rarr; Targets &rarr; Plan</div>
+
+
+    <!-- Gantt Chart Placeholder -->
+    <div style="margin-top:24px;width:100%;display:flex;justify-content:center; margin-bottom:32px;">
+      <canvas id="ganttChart" width="750" height="240" style="background:#0f172a; border-radius:10px; box-shadow:0 6px 18px rgba(2,6,23,0.45);"></canvas>
+    </div>
+    <div style="margin-top:32px; width:100%; display:flex; justify-content:flex-end;">
+      <button onclick="window.location.href='objectives-table.html'" style="font-size:1.2rem; padding:8px 24px; border-radius:8px; border:none; background:#60a5fa; color:#0f172a; font-weight:bold; cursor:pointer;">&gt;</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <script>
+    // --- Gantt Chart Data Template (copy your data here) ---
+    const ganttData = [
+      { label: 'AI First Enablement & Mentoring', start: '2026-04-01', end: '2026-09-30', color: '#60a5fa' },
+      { label: 'Apply AIDLC in 2 Programs', start: '2026-05-01', end: '2026-07-31', color: '#38bdf8' },
+      { label: 'Build 3 AI First Business Case & ROI Capability', start: '2026-05-01', end: '2026-07-31', color: '#2563eb' },
+      { label: 'Build/Co-Build 1 Agent', start: '2026-04-15', end: '2026-06-30', color: '#1e40af' },
+      { label: 'Identify 5 AI Intervention Opportunities', start: '2026-04-01', end: '2026-05-15', color: '#2563eb' }
+    ];
+
+    // --- Gantt Chart Drawing (basic horizontal bars) ---
+    function drawGanttChart(data) {
+      // --- FULL CLEANUP: BASIC GANTT CHART ONLY ---
+      // Convert dates to timestamps
+      const minDate = Math.min(...data.map(d => new Date(d.start).getTime()));
+      const maxDate = Math.max(...data.map(d => new Date(d.end).getTime()));
+      // Stacked horizontal bar workaround for Gantt chart
+      const labels = data.map(d => d.label);
+      const offsets = data.map(d => new Date(d.start).getTime() - minDate);
+      const durations = data.map(d => new Date(d.end).getTime() - new Date(d.start).getTime());
+      const chartData = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Offset',
+            data: offsets,
+            backgroundColor: 'rgba(0,0,0,0)', // invisible
+            stack: 'gantt',
+            barThickness: 24,
+            borderSkipped: false
+          },
+          {
+            label: 'Duration',
+            data: durations,
+            backgroundColor: data.map(d => d.color),
+            stack: 'gantt',
+            barThickness: 24,
+            borderRadius: 8,
+            borderSkipped: false
+          }
+        ]
+      };
+
+      // Generate unique month-year ticks for the x-axis
+      var tickDates = [];
+      var tickValues = [];
+      var d = new Date(minDate);
+      d.setDate(1);
+      var msPerMonth = 1000 * 60 * 60 * 24 * 30.4375;
+      while (d.getTime() <= maxDate) {
+        tickDates.push(new Date(d.getTime()));
+        tickValues.push(d.getTime() - minDate);
+        d.setMonth(d.getMonth() + 1);
+      }
+      function formatMonthYear(date) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return months[date.getMonth()] + ' ' + (date.getFullYear() % 100);
+      }
+
+      const ctx = document.getElementById('ganttChart').getContext('2d');
+      if(window.ganttChartInstance) window.ganttChartInstance.destroy();
+      window.ganttChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Plan', color: '#60a5fa', font: { size: 13.5, family: 'Inter, Segoe UI, Roboto, Arial, sans-serif', weight: '700' } },
+            tooltip: { enabled: false }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: maxDate - minDate,
+              type: 'linear',
+              stacked: true,
+              ticks: {
+                color: '#bae6fd',
+                font: { size: 8.25 },
+                callback: function(value) {
+                  for (var i = 0; i < tickValues.length; i++) {
+                    if (Math.abs(value - tickValues[i]) < (tickValues[1] ? (tickValues[1] - tickValues[0]) / 2 : 100000000)) {
+                      return formatMonthYear(tickDates[i]);
+                    }
+                  }
+                  return '';
+                },
+                autoSkip: false,
+                maxTicksLimit: tickDates.length,
+                stepSize: msPerMonth
+              },
+              grid: { color: '#334155' }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Target',
+                color: '#60a5fa',
+                font: { size: 15.75, family: 'Inter, Segoe UI, Roboto, Arial, sans-serif', weight: '700' }
+              },
+              ticks: { color: '#bae6fd', font: { size: 8.25 } },
+              grid: { color: '#334155' }
+            }
+          }
+        }
+      });
+    
+    }
+    drawGanttChart(ganttData);
+    </script>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<style>
+body, html {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(180deg, #0f172a 60%, #334155 100%);
+	font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+	color: #e6eef8;
+	overflow: hidden;
+	font-size: clamp(0.675rem, 0.9vw, 0.86rem);
+}
+.main-content {
+	width: 100vw;
+	height: 100vh;
+	max-width: 100vw;
+	max-height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 3.5vh;
+	box-sizing: border-box;
+	overflow: hidden;
+	text-align: center;
+}
+.action-theme-card {
+	background: rgba(15,23,42,0.92);
+	border-radius: 18px;
+	box-shadow: 0 8px 32px rgba(30,41,59,0.18);
+	padding: clamp(16px, 4vw, 38px) clamp(12px, 5vw, 44px) clamp(12px, 3vw, 32px) clamp(12px, 5vw, 44px);
+	width: 100%;
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1.5px solid rgba(255,255,255,0.08);
+	position: relative;
+}
+.action-title {
+	font-size: clamp(0.9rem, 2.25vw, 1.575rem);
+	font-weight: 700;
+	color: #60a5fa;
+	margin-bottom: 0;
+	letter-spacing: 0.5px;
+}
+.open-questions-list {
+	width: 100%;
+	text-align: left;
+	margin: 0 auto 18px auto;
+	padding: 0 0 0 1em;
+	font-size: 1.2rem;
+	color: #bae6fd;
+}
+.open-questions-list li {
+		color: #bae6fd;
+		margin-bottom: 1.2em;
+		font-size: 1em;
+}
+</style>
+<div class="main-content">
+	<div class="action-theme-card">
+		<div class="action-title">Open Questions</div>
+		<ol class="open-questions-list">
+			<li>Based on the available information, to which project types (Data Engineering, Product Implementation, Maintenance) would I most like to apply AIFD principles?</li>
+			<li>Am I more motivated to develop deep subject‑matter expertise as an AIFD SME or to apply AIFD concepts broadly across diverse teams and initiatives—and what specific steps should I take post‑graduation to reinforce that chosen path?</li>
+			<li>I see my strongest contribution emerging through internal CoE‑type responsibilities —how can I consciously shape my engagement choices to align with that preference?</li>
+		</ol>
+	</div>
+</div>
