@@ -1,23 +1,27 @@
-<style>
-  /* Updated styles to handle empty bio */
-  .profile-bio-fullwidth {
-    margin: 0;  /* Set margin to 0 instead of 10px 0 */
-  }
-  .profile-bio-fullwidth:empty {
-    display: none;  /* Hide empty bios */
-  }
-</style>
-<script>
-  function injectBioAndNormalize(bioText) {
-    // Existing code...
-    if (!bioText || bioText.trim() === '') {  // Check if bioText is empty or whitespace
-      const existingBio = document.querySelector('.profile-bio-fullwidth');
-      if (existingBio) {
-        existingBio.remove();  // Remove any existing .profile-bio-fullwidth
-      }
-      return;  // Exit if no bioText
-    }
-    // Continue with creating bio element if bioText is not empty
-    // Existing code...
-  }
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajan Profile Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Rajan's Profile Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>This is the about section.</p>
+        </section>
+        <section>
+            <h2>Projects</h2>
+            <p>List of projects will be here.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Contact: hvrajan@example.com</p>
+    </footer>
+</body>
+</html>
